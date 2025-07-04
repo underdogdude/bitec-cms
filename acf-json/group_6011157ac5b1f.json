@@ -1,0 +1,118 @@
+{
+    "key": "group_6011157ac5b1f",
+    "title": "Block Social Media",
+    "fields": [
+        {
+            "key": "field_601115870479b",
+            "label": "Social",
+            "name": "social",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_601115990479c",
+                    "label": "Social Name",
+                    "name": "social_name",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "For Line and Messenger, insert only \"ID\".",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "facebook": "Facebook",
+                        "twitter": "Twitter",
+                        "x": "X",
+                        "instagram": "Instagram",
+                        "line": "Line",
+                        "threads": "Threads",
+                        "youtube": "Youtube",
+                        "vimeo": "Vimeo",
+                        "pinterest": "Pinterest",
+                        "linkedin": "Linkedin",
+                        "podcast": "Podcast",
+                        "messenger": "Messenger",
+                        "mail": "Email",
+                        "tiktok": "TikTok",
+                        "phone": "Phone",
+                        "other": "Other"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_601115870479b"
+                },
+                {
+                    "key": "field_601115b50479d",
+                    "label": "Social Url",
+                    "name": "social_url",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "URL must NOT include \"http\" or \"https\"",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_601115870479b"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/social-media"
+            }
+        ],
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1744536520
+}
