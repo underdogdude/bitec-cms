@@ -1,68 +1,75 @@
 /*
- * Font Name: Anuphan
+ * Font name: DBheavent
  */
-@font-face {
-  font-family: "Anuphan";
-  src: url("../fonts/anuphan/anuphan.woff2") format("woff2"),
-    url("../fonts/anuphan/anuphan.woff") format("woff");
-  font-weight: 400;
+ @font-face {
+  font-family: "DBheavent";
+  src: url('../fonts/db-heavent/DB Heavent Thin v3.2.1.woff2') format('woff2'),
+       url('../fonts/db-heavent/DB Heavent Thin v3.2.1.woff2') format('woff'),
+       url('../fonts/db-heavent/DB Heavent Thin v3.2.1.eot') format('eot'),
+       url('../fonts/db-heavent/DB Heavent Thin v3.2.1.ttf') format('truetype'),
+       url('../fonts/db-heavent/DB Heavent Thin v3.2.1.otf') format('opentype');
+  font-weight: 300;
   font-style: normal;
-  font-display: swap;
+  font-display: fallback;
+  text-rendering: optimizeLegibility;
 }
 @font-face {
-  font-family: "Anuphan";
-  src: url("../fonts/anuphan/anuphan-medium.woff2") format("woff2"),
-    url("../fonts/anuphan/anuphan-medium.woff") format("woff");
+  font-family: "DBheavent";
+  src: url('../fonts/db-heavent/DB Heavent v3.2.1.woff2') format('woff2'),
+       url('../fonts/db-heavent/DB Heavent v3.2.1.woff2') format('woff'),
+       url('../fonts/db-heavent/DB Heavent v3.2.1.eot') format('eot'),
+       url('../fonts/db-heavent/DB Heavent v3.2.1.ttf') format('truetype'),
+       url('../fonts/db-heavent/DB Heavent v3.2.1.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "DBheavent";
+  src: url('../fonts/db-heavent/DB Heavent Med v3.2.1.woff2') format('woff2'),
+       url('../fonts/db-heavent/DB Heavent Med v3.2.1.woff2') format('woff'),
+       url('../fonts/db-heavent/DB Heavent Med v3.2.1.eot') format('eot'),
+       url('../fonts/db-heavent/DB Heavent Med v3.2.1.ttf') format('truetype'),
+       url('../fonts/db-heavent/DB Heavent Med v3.2.1.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: fallback;
+  text-rendering: optimizeLegibility;
 }
 @font-face {
-  font-family: "Anuphan";
-  src: url("../fonts/anuphan/anuphan-bold.woff2") format("woff2"),
-    url("../fonts/anuphan/anuphan-bold.woff") format("woff");
+  font-family: "DBheavent";
+  src: url('../fonts/db-heavent/DB Heavent Bd v3.2.1.woff2') format('woff2'),
+       url('../fonts/db-heavent/DB Heavent Bd v3.2.1.woff2') format('woff'),
+       url('../fonts/db-heavent/DB Heavent Bd v3.2.1.eot') format('eot'),
+       url('../fonts/db-heavent/DB Heavent Bd v3.2.1.ttf') format('truetype'),
+       url('../fonts/db-heavent/DB Heavent Bd v3.2.1.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: fallback;
+  text-rendering: optimizeLegibility;
 }
 
-/*
- * Font Name: Maledpan
- */
+
+// DP Pro
 @font-face {
-  font-family: "Maledpan";
-  src: url("../fonts/maledpan/maledpan.woff2") format("woff2"),
-    url("../fonts/maledpan/maledpan.woff") format("woff");
-  font-weight: normal;
+  font-family: "DinPro";
+  src: url("../fonts/din-pro/dinpro_light.otf") format("opentype");
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Maledpan";
-  src: url("../fonts/maledpan/maledpan-bold.woff2") format("woff2"),
-    url("../fonts/maledpan/maledpan-bold.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-/*
- * Font name: Sarabun
- */
-@font-face {
-  font-family: "Sarabun";
-  src: local("Sarabun"), url("../fonts/sarabun/sarabun.woff2") format("woff2"),
-    url("../fonts/sarabun/sarabun.woff") format("woff");
+  font-family: "DinPro";
+  src: url("../fonts/din-pro/dinpro.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-display: fallback;
+  font-display: swap;
 }
 @font-face {
-  font-family: "Sarabun";
-  src: local("Sarabun"),
-    url("../fonts/sarabun/sarabun-bold.woff2") format("woff2"),
-    url("../fonts/sarabun/sarabun-bold.woff") format("woff");
+  font-family: "DinPro";
+  src: url("../fonts/din-pro/dinpro_bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
-  font-display: fallback;
+  font-display: swap;
 }

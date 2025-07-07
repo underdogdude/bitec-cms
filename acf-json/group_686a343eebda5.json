@@ -1,0 +1,114 @@
+{
+    "key": "group_686a343eebda5",
+    "title": "Option: Call-to-action",
+    "fields": [
+        {
+            "key": "field_686a8b0efb786",
+            "label": "Get In Touch",
+            "name": "get_in_touch",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_description": "",
+            "graphql_field_name": "getInTouch",
+            "graphql_non_null": 0
+        },
+        {
+            "key": "field_686a34439a749",
+            "label": "Get In Touch TH",
+            "name": "get_in_touch_th",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_description": "",
+            "graphql_field_name": "getInTouchThai",
+            "graphql_non_null": 0
+        },
+        {
+            "key": "field_686a3482313d9",
+            "label": "Request a proposal",
+            "name": "request_a_proposal",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_description": "",
+            "graphql_field_name": "requestAProposal",
+            "graphql_non_null": 0,
+            "wpml_cf_preferences": 3
+        },
+        {
+            "key": "field_686a8b1afb787",
+            "label": "Request a proposal TH",
+            "name": "request_a_proposal_th",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_description": "",
+            "graphql_field_name": "requestAProposalThai",
+            "graphql_non_null": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "show_in_graphql": 1,
+    "graphql_field_name": "CallToActionButtons",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1751813373
+}

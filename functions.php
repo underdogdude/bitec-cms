@@ -68,7 +68,9 @@ if (!function_exists('seed_setup')) {
         register_nav_menus(array(
             'primary' => esc_html__('Main Menu', 'seed'),
             'mobile'  => esc_html__('Mobile Menu', 'seed'),
+            'top-menu'  => esc_html__('Top Menu', 'seed'),
         ));
+
         add_theme_support('html5', array(
             'search-form',
             'comment-form',
@@ -112,22 +114,12 @@ add_action('widgets_init', 'seed_widgets_init');
  */
 function seed_scripts()
 {
-
     wp_enqueue_style('s-mobile', get_theme_file_uri('/css/mobile.css'), array(), false);
     wp_enqueue_style('s-desktop', get_theme_file_uri('/css/desktop.css'), array(), false , '(min-width: 1025px)');
 
     if ($GLOBALS['s_style_css'] == 'enable') {
         wp_enqueue_style('s-style', get_stylesheet_uri());
     }
-
-    if ($GLOBALS['s_is_woo']) {
-        wp_enqueue_style('s-woo', get_theme_file_uri('/css/woo.css'));
-    }
-
-    if ($GLOBALS['s_fontawesome'] == 'enable') {
-        wp_enqueue_style('s-fa', get_theme_file_uri('/fonts/fontawesome/css/all.min.css'), array(),'5.10.1');
-    }
-
     wp_enqueue_script('s-scripts', get_theme_file_uri('/js/scripts.js'), array(), false, true);
     
     if ($GLOBALS['s_keen_slider'] == 'enable') {
@@ -143,8 +135,6 @@ function seed_scripts()
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
-    wp_enqueue_style('s-swiper', get_theme_file_uri('/css/swiper-bundle.min.css'), array(), false);
-    wp_enqueue_script('s-swiper', get_theme_file_uri('/js/swiper-bundle.min.js'), array(), false, true);
 }
 add_action('wp_enqueue_scripts', 'seed_scripts');
 
@@ -226,35 +216,103 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {require get_template_directory() . '/inc/jetpack.php';}
 
 
+//
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title'	=> 'Theme Settings',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false,
+	));
+}
+
+
+/*
+     ####  #####    ##   #####  #    #  ####  #      
+    #    # #    #  #  #  #    # #    # #    # #      
+    #      #    # #    # #    # ###### #    # #      
+    #  ### #####  ###### #####  #    # #  # # #      
+    #    # #   #  #    # #      #    # #   #  #      
+     ####  #    # #    # #      #    #  ### # ###### 
+*/
 add_action('graphql_register_types', function() {
-  register_graphql_field('Page', 'greenshiftInlineCss', [
-    'type' => 'String',
-    'description' => 'Greenshift-generated inline CSS from wp_head',
-    'resolve' => function($post) {
-      return get_greenshift_inline_css($post->ID);
-    }
-  ]);
+
+    register_graphql_field('Page', 'greenshiftInlineCss', [
+        'type' => 'String',
+        'description' => 'Greenshift-generated inline CSS from wp_head',
+        'resolve' => function($post) {
+        return get_inline_css_by_id($post->ID, 'greenshift-post-css-inline-css');
+        }
+    ]);
+    register_graphql_field('RootQuery', 'globalInlineCss', [
+        'type' => 'String',
+        'description' => 'Global CSS from <style id="global-styles-inline-css">',
+        'resolve' => function() {
+            return get_inline_css_by_id(null, 'global-styles-inline-css');
+        }
+    ]);
+    register_graphql_field('RootQuery', 'sMobileCssUrl', [
+        'type' => 'String',
+        'description' => 'URL of mobile.css',
+        'resolve' => fn() => get_enqueued_style_url('s-mobile')
+    ]);
+
+    register_graphql_field('RootQuery', 'sDesktopCssUrl', [
+        'type' => 'String',
+        'description' => 'URL of desktop.css',
+        'resolve' => fn() => get_enqueued_style_url('s-desktop')
+    ]);
 });
 
-function get_greenshift_inline_css($post_id) {
-  // Temporarily set up post environment
-  $post = get_post($post_id);
-  if (!$post) return null;
+function get_inline_css_by_id($post_id = null, $style_id) {
+    if ($post_id) {
+        $post = get_post($post_id);
+        if (!$post) return null;
+        setup_postdata($post);
+    }
 
-  setup_postdata($post);
-  ob_start();
+    ob_start();
+    do_action('wp_enqueue_scripts');
+    do_action('wp_head');
+    $head_output = ob_get_clean();
 
-  // Trigger all hooks that would normally render inline CSS
-  do_action('wp_enqueue_scripts');
-  do_action('wp_head');
+    if ($post_id) wp_reset_postdata();
 
-  $head_output = ob_get_clean();
-  wp_reset_postdata();
+    if (preg_match('/<style[^>]+id=["\']' . preg_quote($style_id, '/') . '["\'][^>]*>(.*?)<\/style>/is', $head_output, $match)) {
+        return trim($match[1]);
+    }
 
-  // Extract the Greenshift inline style block
-  if (preg_match('/<style[^>]+id=["\']greenshift-post-css-inline-css["\'][^>]*>(.*?)<\/style>/is', $head_output, $match)) {
-    return $match[1]; // Return just the CSS part
-  }
+    return null;
+}
 
-  return null;
+function get_enqueued_style_url($handle) {
+  do_action('wp_enqueue_scripts'); // ensure styles are loaded
+  global $wp_styles;
+
+  return isset($wp_styles->registered[$handle])
+    ? $wp_styles->registered[$handle]->src
+    : null;
+}
+
+// Make SVG code work
+add_filter( 'wp_kses_allowed_html', 'acf_add_allowed_svg_tag', 10, 2 );
+function acf_add_allowed_svg_tag( $tags, $context ) {
+    if ( $context === 'acf' ) {
+        $tags['svg']  = array(
+            'xmlns'       => true,
+            'fill'        => true,
+            'viewbox'     => true,
+            'role'        => true,
+            'aria-hidden' => true,
+            'focusable'   => true,
+        );
+        $tags['path'] = array(
+            'd'    => true,
+            'fill' => true,
+        );
+    }
+
+    return $tags;
 }

@@ -30,17 +30,9 @@
 
                 <div class="site-toggle"><b></b></div>
 
-                <?php if (is_active_sidebar( 'headbar_m' )): ?>
-                <div id="headbar_m" class="_mobile"><?php dynamic_sidebar( 'headbar_m' ); ?></div>
-                <?php endif; ?>
-
-                <?php if (is_active_sidebar( 'headbar_d' )): ?>
-                <div id="headbar_d" class="_desktop"><?php dynamic_sidebar( 'headbar_d' ); ?></div>
-                <?php else: ?>
                 <nav id="site-navigation" class="site-nav-d _desktop">
                     <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) );?>
                 </nav>
-                <?php endif; ?>
 
                 <a class="site-search s-modal-trigger m-user" onclick="return false;"
                     data-popup-trigger="site-search"><?php seed_icon('search'); ?></a>

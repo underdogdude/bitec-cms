@@ -72,7 +72,7 @@
 .site-toggle {
   position: absolute;
   top: calc((var(--s-header-height) - 50px) / 2);
-  left: 0;
+  right: 0;
   height: 50px;
   width: 56px;
   font-size: 10px;
@@ -422,57 +422,6 @@
       img {
         border-radius: var(--s-border-radius) var(--s-border-radius) 0 0;
       }
-    }
-  }
-}
-
-.content-headline {
-  background: var(--s-bg);
-  color: var(--s-text);
-  position: relative;
-  a {
-    color: var(--s-text);
-    display: block;
-    height: 100%;
-  }
-  &.-bright {
-    .pic {
-      img {
-        opacity: 1;
-      }
-    }
-  }
-  &.-notitle {
-    .info {
-      display: none;
-    }
-  }
-  .pic {
-    height: 100%;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      max-height: 500px;
-      opacity: 0.7;
-    }
-  }
-  .info {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    transition: 0.5s ease-in-out;
-    h2 {
-      margin: 0;
-    }
-    h3 {
-      font-size: 0.8em;
-      margin: 8px 0 0;
-    }
-    @media (min-width: 768px) {
-      font-size: 30px;
     }
   }
 }

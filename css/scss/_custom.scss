@@ -7,11 +7,11 @@ body {
     scroll-behavior: smooth;
   }
 .s-container {
-    max-width: 1200px;
+    max-width: 1300px;
     padding-right: var(--s-site-space);
     padding-left: var(--s-site-space);
     @media (min-width: 1024px) {
-        max-width: 1320px;
+        max-width: 1300px;
         padding-right: var(--s-site-space);
         padding-left: var(--s-site-space);
     }
@@ -126,12 +126,12 @@ body {
     padding-left: var(--s-site-space);
     padding-right: var(--s-site-space);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     ._desktop {
         display: none !important;
     }
 }
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
     ._mobile {
         display: none !important;
     }
@@ -195,11 +195,8 @@ a {
     font-weight: 500 !important;
 }
 
-.font-btn { 
-    font-family: "Chakra Petch" !important;
-}
-.font-ibm { 
-    font-family: "IBM Plex Sans Thai" !important;
+.font-brand { 
+    font-family: var(--s-brand) !important;
 }
 
 @media only screen and (max-width: 600px) { 
