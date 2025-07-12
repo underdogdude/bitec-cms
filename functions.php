@@ -122,12 +122,6 @@ function seed_scripts()
     }
     wp_enqueue_script('s-scripts', get_theme_file_uri('/js/scripts.js'), array(), false, true);
     
-    if ($GLOBALS['s_keen_slider'] == 'enable') {
-        wp_enqueue_script('s-slider', get_theme_file_uri('/js/keen-slider.js'), array(), false, true);
-    }
-    
-    wp_enqueue_script('s-vanilla', get_theme_file_uri('/js/main-vanilla.js'), array(), false, true);
-
     if ($GLOBALS['s_jquery'] == 'enable') {
         wp_enqueue_script('s-jquery', get_theme_file_uri('/js/main-jquery.js'), array('jquery'), false, true);
     }
@@ -315,4 +309,99 @@ function acf_add_allowed_svg_tag( $tags, $context ) {
     }
 
     return $tags;
+}
+
+
+// Ensure proper GraphQL exposure
+add_action('init', function() {
+    register_post_type('wp_block', [
+        'show_in_graphql' => true,
+        'graphql_single_name' => 'reusableBlock',
+        'graphql_plural_name' => 'reusableBlocks',
+        'show_in_rest' => true,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => false,
+        'supports' => ['title', 'editor', 'custom-fields'],
+        'capability_type' => 'post',
+        'map_meta_cap' => true,
+    ]);
+}, 20);
+
+// Force include in GraphQL if still not showing
+add_filter('wpgraphql_post_typename', function($typename, $post) {
+    if ($post->post_type === 'wp_block') {
+        return 'ReusableBlock';
+    }
+    return $typename;
+}, 10, 2);
+
+
+
+/* === Social Media Block === */
+if (function_exists('acf_register_block_type')) {
+    add_action( 'acf/init', 'acf_register_social_media' );
+}
+function acf_register_social_media() { 
+    acf_register_block_type(
+        array(
+            'name' => 'social-media',
+            'title' => 'Social Media',
+            'description' => __('Display Social Media'),
+            'render_template' => 'template-parts/blocks/social-media.php',
+            'icon' => array(
+                'foreground' => '#ffffff',
+                'background' => '#0093F9',
+                'src' => 'share',
+            ),
+            'keywords' => array('social', 'media')
+        )
+    );
+}
+
+
+/* === Menu ID Block === */
+if (function_exists('acf_register_block_type')) {
+    add_action( 'acf/init', 'acf_menu_id' );
+}
+function acf_menu_id() { 
+    acf_register_block_type(
+        array(
+            'name' => 'Menu ID',
+            'title' => 'Menu ID',
+            'description' => __('Display MENU BY ID'),
+            'render_template' => 'template-parts/blocks/menu-id.php',
+            'icon' => array(
+                'foreground' => '#ffffff',
+                'background' => '#0981C4',
+                'src' => 'menu-alt3',
+            ),
+            'keywords' => array('news')
+        )
+    );
+}
+
+
+
+
+/* === Block: Event Carousel === */
+if (function_exists('acf_register_block_type')) {
+    add_action( 'acf/init', 'acf_event_carousel' );
+}
+function acf_event_carousel() { 
+    acf_register_block_type(
+        array(
+            'name' => 'Event Carousel',
+            'title' => 'Event Carousel',
+            'description' => __('Display Event Carousel'),
+            'render_template' => 'template-parts/blocks/event-carousel.php',
+            'icon' => array(
+                'foreground' => '#ffffff',
+                'background' => '#0981C4',
+                'src' => 'menu-alt3',
+            ),
+            'keywords' => array('news')
+        )
+    );
 }

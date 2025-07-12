@@ -1,6 +1,9 @@
 </div>
 <!--#content-->
 
+
+<?php echo do_shortcode( "[wp_reusable_render inlinestyle=1 id='194']" ); ?>
+
 <?php if (is_active_sidebar( 'footbar' ) ) : ?>
 
 <aside id="footbar" class="site-footbar">

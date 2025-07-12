@@ -43,6 +43,9 @@
   a {
     color: var(--s-text);
   }
+  .show-nav & { 
+    position: fixed;
+  }
 }
 
 .site-header-space {
@@ -142,7 +145,7 @@
 
 .site-nav-m {
   font-size: 17px;
-  position: absolute;
+  position: fixed;
   display: block;
   left: 0;
   top: var(--s-header-height);
@@ -359,7 +362,6 @@
   position: relative;
   .pic {
     line-height: 0;
-    margin-bottom: 15px;
     overflow: hidden;
     a:hover,
     a:active {
@@ -406,21 +408,7 @@
   &:hover {
     .pic {
       img {
-        transform: scale(1.12);
-      }
-    }
-  }
-  &.-card {
-    box-shadow: var(--s-shadow);
-    border-radius: var(--s-border-radius);
-    padding: var(--s-box-padding);
-    background-color: var(--s-bg);
-    .pic {
-      margin: calc(-1 * var(--s-box-padding)) calc(-1 * var(--s-box-padding))
-        var(--s-box-padding);
-      border-radius: var(--s-border-radius) var(--s-border-radius) 0 0;
-      img {
-        border-radius: var(--s-border-radius) var(--s-border-radius) 0 0;
+        transform: scale(1.05);
       }
     }
   }

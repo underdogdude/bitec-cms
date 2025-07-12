@@ -61,8 +61,14 @@
                     "allow_null": 0,
                     "allow_in_bindings": 1,
                     "ui": 0,
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "socialName",
+                    "graphql_non_null": 0,
                     "ajax": 0,
                     "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
                     "parent_repeater": "field_601115870479b"
                 },
                 {
@@ -114,5 +120,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744536520
+    "show_in_graphql": 1,
+    "graphql_field_name": "blockSocialMedia",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1752138574
 }

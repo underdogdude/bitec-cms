@@ -25,7 +25,6 @@
 
                 <div class="site-branding">
                     <div class="site-logo"><?php seed_logo(); ?></div>
-                    <?php seed_title(); ?>
                 </div>
 
                 <div class="site-toggle"><b></b></div>
@@ -33,16 +32,6 @@
                 <nav id="site-navigation" class="site-nav-d _desktop">
                     <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) );?>
                 </nav>
-
-                <a class="site-search s-modal-trigger m-user" onclick="return false;"
-                    data-popup-trigger="site-search"><?php seed_icon('search'); ?></a>
-
-                <?php seed_member_menu() ?>
-
-                <?php if (is_active_sidebar( 'action' )) : ?>
-                <div class="site-action _desktop"><?php dynamic_sidebar( 'action' ); ?></div>
-                <?php endif; ?>
-
             </div>
             <nav id="site-nav-m" class="site-nav-m">
                 <div class="s-container">
