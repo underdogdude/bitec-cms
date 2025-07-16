@@ -2,7 +2,7 @@
     $args = [
         'post_type'      => 'event',
         'posts_per_page' => 9,
-        'post_status'    => 'publish'
+        'post_status'    => 'publish',
     ];
     $query = new WP_Query($args);
     $thai_months = [
@@ -20,7 +20,8 @@
         'December' => 'ธันวาคม',
     ];
 ?>
-
+<div id="block-event-carousel"></div>
+<?php return; ?>
 <div class="wp-block-greenshift-blocks-swiper gs-swiper swiper-event-carousel">
     <div class="gs-swiper-init"
         data-slidesperview="3"
@@ -51,13 +52,20 @@
                         // Slug
                         $post_slug = get_post_field('post_name', get_the_ID());
                         $post_type = get_post_type(get_the_ID());
-                        $href = '/' . $post_type . '/' . $post_slug;
+                        $current_language = apply_filters( 'wpml_current_language', null );
+                        if ($current_language == 'th') {
+                            $href = '/' . $current_language . '/' . $post_type . '/' . $post_slug;
+                            
+                        }else { 
+                            $href = '/' . $post_type . '/' . $post_slug;
+                        }
+                      
                     ?>
                     <div class="swiper-slide">
                         <div class="swiper-slide-inner">
                            <article id="post-<?php the_ID(); ?>" <?php post_class('content-item -card'); ?>>
                                 <div class="pic">
-                                    <a href="<?php echo esc_url($href); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
+                                    <a href="<?php echo $href; ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
                                         <?php if(has_post_thumbnail()) { the_post_thumbnail('full');} else { echo '<img src="' . esc_url( get_template_directory_uri()) .'/img/thumb.jpg" alt="'. get_the_title() .'" />'; }?>
                                     </a>
                                 </div>
@@ -65,16 +73,19 @@
                                     <div class="entry-meta">
 
                                         <?php 
-                                            $today = date('Ymd');
+                                            $today = date('Y-m-d');
                                             if ($event_startdate && $event_enddate) {
-                                                if ($today >= $event_startdate && $today <= $event_enddate) {
+                                                $start_date = date('Y-m-d', strtotime($event_startdate));
+                                                $end_date = date('Y-m-d', strtotime($event_enddate));
+                                                if ($today >= $start_date && $today <= $end_date) {
                                                     echo '<div class="happening-now-label">';
                                                     echo '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="9" cy="9" r="9" fill="#FAE7EA"/> <circle cx="9" cy="9" r="6" fill="#E8909E"/> <circle cx="9" cy="9" r="3" fill="#CE0E2D"/> </svg>';
                                                     echo __('Happening Now', 'wpml_theme');
                                                     echo '</div>';
                                                 }
                                             } elseif ($event_startdate && !$event_enddate) {
-                                                if ($today == $event_startdate) {
+                                                $start_date = date('Y-m-d', strtotime($event_startdate));
+                                                if ($today === $start_date) {
                                                     echo '<div class="happening-now-label">';
                                                     echo '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="9" cy="9" r="9" fill="#FAE7EA"/> <circle cx="9" cy="9" r="6" fill="#E8909E"/> <circle cx="9" cy="9" r="3" fill="#CE0E2D"/> </svg>';
                                                     echo __('Happening Now', 'wpml_theme');
@@ -104,7 +115,7 @@
                                         </svg>
                                         <?php 
                                             if ($event_startdate) {
-                                                $start_date = DateTime::createFromFormat('Ymd', $event_startdate);
+                                                $start_date = DateTime::createFromFormat('Y-m-d H:i:s', $event_startdate);
                                                 $start_day = $start_date->format('j');
                                                 $start_month = $start_date->format('F');
                                                 $start_year = $start_date->format('Y');
@@ -114,7 +125,7 @@
 
 
                                                 if ($event_enddate) {
-                                                    $end_date = DateTime::createFromFormat('Ymd', $event_enddate);
+                                                    $end_date = DateTime::createFromFormat('Y-m-d H:i:s', $event_enddate);
                                                     $end_day = $end_date->format('j');
                                                     $end_month = $end_date->format('F');
                                                     $end_year = $end_date->format('Y');

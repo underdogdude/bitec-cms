@@ -240,6 +240,20 @@ add_action('graphql_register_types', function() {
         return get_inline_css_by_id($post->ID, 'greenshift-post-css-inline-css');
         }
     ]);
+    register_graphql_field('Event', 'greenshiftInlineCss', [
+        'type' => 'String',
+        'description' => 'Greenshift-generated inline CSS from wp_head',
+        'resolve' => function($post) {
+        return get_inline_css_by_id($post->ID, 'greenshift-post-css-inline-css');
+        }
+    ]);
+    register_graphql_field('Post', 'greenshiftInlineCss', [
+        'type' => 'String',
+        'description' => 'Greenshift-generated inline CSS from wp_head',
+        'resolve' => function($post) {
+        return get_inline_css_by_id($post->ID, 'greenshift-post-css-inline-css');
+        }
+    ]);
     register_graphql_field('RootQuery', 'globalInlineCss', [
         'type' => 'String',
         'description' => 'Global CSS from <style id="global-styles-inline-css">',
@@ -382,9 +396,6 @@ function acf_menu_id() {
     );
 }
 
-
-
-
 /* === Block: Event Carousel === */
 if (function_exists('acf_register_block_type')) {
     add_action( 'acf/init', 'acf_event_carousel' );
@@ -404,4 +415,55 @@ function acf_event_carousel() {
             'keywords' => array('news')
         )
     );
+}
+
+
+/* === Block: News and Activity === */
+if (function_exists('acf_register_block_type')) {
+    add_action( 'acf/init', 'acf_news_activity' );
+}
+function acf_news_activity() { 
+    acf_register_block_type(
+        array(
+            'name' => 'News Activity',
+            'title' => 'News Activity',
+            'description' => __('Display News Activity'),
+            'render_template' => 'template-parts/blocks/news-activity.php',
+            'icon' => array(
+                'foreground' => '#ffffff',
+                'background' => '#0981C4',
+                'src' => 'menu-alt3',
+            ),
+            'keywords' => array('news')
+        )
+    );
+}
+
+// 
+add_filter( 'manage_event_posts_columns', 'smashing_filter_columns_event' );
+function smashing_filter_columns_event( $columns ) {
+    // Insert new columns before the 'date' column
+    $new_columns = [];
+    foreach ( $columns as $key => $value ) {
+        if ( $key === 'date' ) {
+            $new_columns['startdate'] = __( 'Start Date' );
+            $new_columns['enddate']   = __( 'End Date' );
+        }
+        $new_columns[$key] = $value;
+    }
+    return $new_columns;
+}
+
+// Populate the custom column content
+add_action( 'manage_event_posts_custom_column', 'smashing_column_event', 10, 2 );
+function smashing_column_event( $column, $post_id ) {
+    if ( 'startdate' === $column ) {
+        $startdate = get_field( 'event_startdate', $post_id );
+        echo $startdate ? date('Y-m-d H:i', strtotime($startdate)) : '-';
+    }
+
+    if ( 'enddate' === $column ) {
+        $enddate = get_field( 'event_enddate', $post_id );
+        echo $enddate ? date('Y-m-d H:i', strtotime($enddate)) : '-';
+    }
 }

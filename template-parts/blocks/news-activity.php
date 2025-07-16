@@ -1,0 +1,1 @@
+<div id="block-news-activity"></div>

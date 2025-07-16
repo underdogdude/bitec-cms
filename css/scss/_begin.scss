@@ -100,12 +100,6 @@ pre {
 figure {
   margin: 0 0 1rem;
 }
-img {
-  vertical-align: middle;
-  border-style: none;
-  max-width: 100%;
-  height: auto;
-}
 svg {
   overflow: hidden;
   vertical-align: middle;
@@ -259,29 +253,9 @@ h3,
 h4,
 h5,
 h6 {
-  padding: 0;
-  margin: 0 0 0.75rem;
   font-family: var(--s-heading);
   font-weight: var(--s-heading-weight);
   line-height: var(--s-heading-line-height);
-}
-h1 {
-  font-size: 1.75em;
-}
-h2 {
-  font-size: 1.5em;
-}
-h3 {
-  font-size: 1.375em;
-}
-h4 {
-  font-size: 1.125em;
-}
-h5 {
-  font-size: 1em;
-}
-h6 {
-  font-size: 0.875em;
 }
 nav,
 button,
